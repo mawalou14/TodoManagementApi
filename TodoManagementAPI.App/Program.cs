@@ -1,5 +1,6 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using TodoManagementAPI.App.MigrationExtension;
 using TodoManagementAPI.Application.Validators;
 using TodoManagementAPI.Infrastructure.ServiceContainer;
 
@@ -25,6 +26,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.ApplyMigration();
 }
 
 app.UseHttpsRedirection();

@@ -5,8 +5,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using TodoManagementAPI.Application.MappingProfiles;
+using TodoManagementAPI.Application.RepoContract;
 using TodoManagementAPI.Domain.DTOs.User;
 using TodoManagementAPI.Infrastructure.DataAccess;
+using TodoManagementAPI.Infrastructure.RepositoryImplementation;
 
 namespace TodoManagementAPI.Infrastructure.ServiceContainer
 {
@@ -48,6 +50,10 @@ namespace TodoManagementAPI.Infrastructure.ServiceContainer
 
             // Add AutoMapper profiles
             services.AddAutoMapper(typeof(TodoMappingProfile));
+
+            //Add Repositories
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
 
             return services;
         }

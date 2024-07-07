@@ -98,9 +98,9 @@ namespace TodoManagementAPI.Application.Services.Implementations
             var refreshToken = new RefreshToken
             {
                 Token = Convert.ToBase64String(Guid.NewGuid().ToByteArray()),
-                Expires = DateTime.UtcNow.AddDays(_jwtSettings.TokenExpiryInMinutes / 1440), // Converting minutes to days
+                Expires = DateTime.UtcNow.AddDays(_jwtSettings.TokenExpiryInMinutes / 1440),
                 Created = DateTime.UtcNow,
-                UserId = user.UserId // Use UserId instead of Id for refresh token
+                UserId = user.UserId
             };
 
             await _refreshTokenRepository.AddAsync(refreshToken);

@@ -17,29 +17,41 @@ namespace TodoManagementAPI.App.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(Register registerDto)
+        public async Task<IActionResult> Register([FromBody] Register registerDto)
         {
-            var result = await _authService.RegisterAsync(registerDto);
-
-            if (!result.Success)
+            if (!ModelState.IsValid)
             {
-                return BadRequest(result.Errors);
+                return BadRequest(ModelState);
             }
 
-            return Ok(new { Token = result.Token, RefreshToken = result.RefreshToken, User = result.User });
+            try
+            {
+                var response = await _authService.RegisterAsync(registerDto);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(Login loginDto)
+        public async Task<IActionResult> Login([FromBody] Login loginDto)
         {
-            var result = await _authService.LoginAsync(loginDto);
-
-            if (!result.Success)
+            if (!ModelState.IsValid)
             {
-                return Unauthorized(result.Errors);
+                return BadRequest(ModelState);
             }
 
-            return Ok(new { Token = result.Token, RefreshToken = result.RefreshToken, User = result.User });
+            try
+            {
+                var response = await _authService.LoginAsync(loginDto);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
     }
 }

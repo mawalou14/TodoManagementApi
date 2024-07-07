@@ -1,18 +1,28 @@
-﻿using TodoManagementAPI.Application.RepoContract;
+﻿using Microsoft.EntityFrameworkCore;
+using TodoManagementAPI.Application.RepoContract;
 using TodoManagementAPI.Domain.Entities;
+using TodoManagementAPI.Infrastructure.DataAccess;
 
 namespace TodoManagementAPI.Infrastructure.RepositoryImplementation
 {
     public class UserRepository : IUserRepository
     {
-        public Task AddAsync(User user)
+        private readonly AppDbContext _context;
+
+        public UserRepository(AppDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public Task<User> GetUserByEmailAsync(string email)
+        public async Task<User?> GetUserByEmailAsync(string email)
         {
-            throw new NotImplementedException();
+            return await _context.Users.SingleOrDefaultAsync(u => u.Email == email);
+        }
+
+        public async Task AddAsync(User user)
+        {
+            await _context.Users.AddAsync(user);
+            await _context.SaveChangesAsync();
         }
     }
 }
