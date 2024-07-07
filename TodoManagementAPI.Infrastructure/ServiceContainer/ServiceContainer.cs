@@ -28,23 +28,21 @@ namespace TodoManagementAPI.Infrastructure.ServiceContainer
             var jwtSection = configuration.GetSection(nameof(JwtSection)).Get<JwtSection>();
 
 
-            var key = Encoding.ASCII.GetBytes(jwtSection.Secret);
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(options =>
+            }).AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,
                     ValidateAudience = true,
-                    ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
-                    ValidIssuer = jwtSection.Issuer,
+                    ValidateLifetime = true,
+                    ValidIssuer = jwtSection!.Issuer,
                     ValidAudience = jwtSection.Audience,
-                    IssuerSigningKey = new SymmetricSecurityKey(key)
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSection.Key!))
                 };
             });
 
