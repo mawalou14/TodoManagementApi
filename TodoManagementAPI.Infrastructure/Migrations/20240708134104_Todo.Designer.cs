@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TodoManagementAPI.Infrastructure.DataAccess;
@@ -11,9 +12,11 @@ using TodoManagementAPI.Infrastructure.DataAccess;
 namespace TodoManagementAPI.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240708134104_Todo")]
+    partial class Todo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,6 +65,9 @@ namespace TodoManagementAPI.Infrastructure.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
+
+                    b.Property<bool>("IsCompleted")
+                        .HasColumnType("boolean");
 
                     b.Property<int>("Priority")
                         .HasColumnType("integer");

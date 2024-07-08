@@ -4,7 +4,7 @@ using TodoManagementAPI.Domain.DTOs.Todo;
 
 namespace TodoManagementAPI.Application.Validators
 {
-    public class CreateTodoValidator : AbstractValidator<CreateTodo>
+    public class CreateTodoValidator : AbstractValidator<CreateTodoDto>
     {
         public CreateTodoValidator()
         {
@@ -16,8 +16,8 @@ namespace TodoManagementAPI.Application.Validators
                 .NotEmpty().WithMessage("Targeted time is required.")
                 .Must(BeAValidDate).WithMessage("Targeted time must be a valid date.");
 
-            RuleFor(x => x.Priority)
-                .IsInEnum().WithMessage("Invalid priority value.");
+            RuleFor(todo => todo.Priority)
+            .InclusiveBetween(1, 3).WithMessage("Priority must be either 1 (Low), 2 (Medium), or 3 (High).");
 
             RuleFor(x => x.Status)
            .InclusiveBetween(1, 2).WithMessage("Status must be either 1 or 2.");

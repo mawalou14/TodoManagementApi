@@ -56,10 +56,12 @@ namespace TodoManagementAPI.Infrastructure.ServiceContainer
             // Add Repositories
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
+            services.AddScoped<ITodoRepository, TodoRepository>();
 
             // Add Services
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ITodoService, TodoService>();
 
             return services;
         }

@@ -20,6 +20,10 @@ builder.Services.AddValidatorsFromAssemblyContaining<LoginValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<RegisterValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<UpdatePasswordValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<UpdateProfileValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<UpdateTodoValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<CreateTodoValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<UpdateTodoPriorityValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<UpdateTodoStatusValidator>();
 
 var app = builder.Build();
 

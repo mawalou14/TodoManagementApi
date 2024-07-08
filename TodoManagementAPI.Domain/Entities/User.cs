@@ -11,5 +11,7 @@ namespace TodoManagementAPI.Domain.Entities
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
         public ICollection<RefreshToken>? RefreshTokens { get; set; }
+
+
     }
 }

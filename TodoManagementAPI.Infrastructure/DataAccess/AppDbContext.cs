@@ -7,6 +7,7 @@ namespace TodoManagementAPI.Infrastructure.DataAccess
     {
         public DbSet<User> Users { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
+        public DbSet<Todo> Todos { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // User entity configuration
@@ -35,6 +36,13 @@ namespace TodoManagementAPI.Infrastructure.DataAccess
                       .WithMany(u => u.RefreshTokens)
                       .HasForeignKey(rt => rt.UserId);
             });
+
+            // Todo entity configuration
+            modelBuilder.Entity<Todo>()
+    .HasOne(t => t.User)       
+    .WithMany()                 
+    .HasForeignKey(t => t.UserId)
+    .OnDelete(DeleteBehavior.Cascade);
 
             base.OnModelCreating(modelBuilder);
         }
