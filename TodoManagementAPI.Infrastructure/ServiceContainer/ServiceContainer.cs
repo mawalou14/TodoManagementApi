@@ -6,6 +6,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using TodoManagementAPI.Application.MappingProfiles;
 using TodoManagementAPI.Application.RepoContract;
+using TodoManagementAPI.Application.Services.Contracts;
+using TodoManagementAPI.Application.Services.Implementations;
 using TodoManagementAPI.Domain.DTOs.User;
 using TodoManagementAPI.Infrastructure.DataAccess;
 using TodoManagementAPI.Infrastructure.RepositoryImplementation;
@@ -51,9 +53,12 @@ namespace TodoManagementAPI.Infrastructure.ServiceContainer
             // Add AutoMapper profiles
             services.AddAutoMapper(typeof(TodoMappingProfile));
 
-            //Add Repositories
+            // Add Repositories
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
+
+            // Add Services
+            services.AddScoped<IAuthService, AuthService>();
 
             return services;
         }

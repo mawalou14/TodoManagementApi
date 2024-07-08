@@ -76,16 +76,16 @@ namespace TodoManagementAPI.Application.Services.Implementations
         private string GenerateJwtToken(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.UTF8.GetBytes(_jwtSettings.Key);
+            var key = Encoding.UTF8.GetBytes(_jwtSettings.Key!);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[]
                 {
-                    new Claim(JwtRegisteredClaimNames.Sub, user.UserId.ToString()),
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                    new Claim(JwtRegisteredClaimNames.Email, user.Email)
-                }),
-                Expires = DateTime.UtcNow.AddMinutes(_jwtSettings.TokenExpiryInMinutes),
+            new Claim(JwtRegisteredClaimNames.Sub, user.UserId.ToString()),
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+            new Claim(JwtRegisteredClaimNames.Email, user.Email!)
+        }),
+                Expires = DateTime.UtcNow.AddMinutes(_jwtSettings.ExpiryMinutes),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 
@@ -98,10 +98,12 @@ namespace TodoManagementAPI.Application.Services.Implementations
             var refreshToken = new RefreshToken
             {
                 Token = Convert.ToBase64String(Guid.NewGuid().ToByteArray()),
-                Expires = DateTime.UtcNow.AddDays(_jwtSettings.TokenExpiryInMinutes / 1440),
                 Created = DateTime.UtcNow,
                 UserId = user.UserId
             };
+
+            // Calculate expiry based on _jwtSettings.TokenExpiryInMinutes
+            refreshToken.Expires = refreshToken.Created.AddDays(_jwtSettings.ExpiryMinutes / 1440);
 
             await _refreshTokenRepository.AddAsync(refreshToken);
 
