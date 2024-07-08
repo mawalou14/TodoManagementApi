@@ -4,6 +4,7 @@ namespace TodoManagementAPI.Domain.DTOs.User
 {
     public class UpdatePassword
     {
+        public string? CurrentPassword { get; set; }
         public string? Password { get; set; }
 
         [Compare(nameof(Password), ErrorMessage = "Must match with the password above.")]

@@ -36,6 +36,11 @@ namespace TodoManagementAPI.Application.Services.Implementations
                 throw new Exception("User not found.");
             }
 
+            if (!BCrypt.Net.BCrypt.Verify(updatePasswordDto.CurrentPassword, user.PasswordHash))
+            {
+                throw new Exception("Current password is incorrect.");
+            }
+
             user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(updatePasswordDto.Password);
 
             await userRepository.UpdateAsync(user);

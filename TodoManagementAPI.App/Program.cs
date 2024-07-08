@@ -18,6 +18,8 @@ builder.Services.AddInfrastructureService(builder.Configuration);
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<LoginValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<RegisterValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<UpdatePasswordValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<UpdateProfileValidator>();
 
 var app = builder.Build();
 
