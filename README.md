@@ -1,11 +1,13 @@
 # Todo Management API
 
-The Todo Management API is a .NET Core web application designed to manage user todos and provide authentication services. It offers the following features:
+The Todo Management API is a .NET Core web application designed for managing user todos and providing authentication services. It includes orchestration support using Docker Compose.
+
+## Features
 
 - **User Authentication:**
-  - User registration with email and password.
-  - User login with JWT token-based authentication.
-  - Password hashing for secure storage.
+  - Register with email and password.
+  - Login with JWT token-based authentication.
+  - Password hashing for security.
 
 - **Todo Management:**
   - Create, retrieve, update, and delete todos.
@@ -21,6 +23,11 @@ The Todo Management API is a .NET Core web application designed to manage user t
   - Password hashing using BCrypt.
   - Role-based access control.
 
+- **Orchestration Support:**
+  - Docker Compose for managing multi-container Docker applications.
+  - Includes Dockerfile for building the API container.
+  - PostgreSQL database container integration.
+
 ## Technologies Used
 
 - **Backend:**
@@ -35,10 +42,12 @@ The Todo Management API is a .NET Core web application designed to manage user t
 
 ## Getting Started
 
-To run the application locally:
+To run the application locally using Docker Compose:
+
 1. Clone this repository.
-2. Configure the database connection in `appsettings.json`.
-3. Build and run the application.
+2. Navigate to the project directory.
+3. Run `docker-compose up --build` to build and start the containers.
+4. Access the API at `http://localhost:5000`.
 
 ## API Endpoints
 
