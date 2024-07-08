@@ -38,8 +38,7 @@ The Todo Management API is a .NET Core web application designed to manage user t
 To run the application locally:
 1. Clone this repository.
 2. Configure the database connection in `appsettings.json`.
-3. Run migrations to create the database schema.
-4. Build and run the application.
+3. Build and run the application.
 
 ## API Endpoints
 
@@ -61,7 +60,3 @@ To run the application locally:
   - `PATCH /profile/{userId}`: Update user profile.
   - `PATCH /profile/{userId}/password`: Change user password.
   - `DELETE /profile/{userId}`: Delete user account.
-
-## Contributors
-
-- Add your name here if contributing.
