@@ -1,0 +1,27 @@
+version: '3.4'
+
+services:
+  adminer:
+    image: adminer
+  TodoManagementDB:
+    container_name: TodoManagementDB
+    image: postgres
+    restart: always
+    shm_size: 128mb
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: TodoManagementDB
+    ports:
+      - "5432:5432"
+    volumes:
+      - todoManagement_data:/var/lib/postgresql/data
+  TodoManagement.api:
+    image: ${DOCKER_REGISTRY-}employeemanagementsystemapi
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+volumes:
+  todoManagement_data:
+    external: false
