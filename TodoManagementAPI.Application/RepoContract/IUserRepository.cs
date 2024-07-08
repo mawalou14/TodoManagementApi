@@ -6,5 +6,8 @@ namespace TodoManagementAPI.Application.RepoContract
     {
         Task<User?> GetUserByEmailAsync(string email);
         Task AddAsync(User user);
+        Task<User> GetUserByIdAsync(Guid userId);
+        Task UpdateAsync(User user);
+        Task DeleteAsync(User user);
     }
 }

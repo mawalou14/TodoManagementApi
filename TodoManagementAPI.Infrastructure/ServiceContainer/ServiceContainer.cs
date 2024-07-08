@@ -59,6 +59,7 @@ namespace TodoManagementAPI.Infrastructure.ServiceContainer
 
             // Add Services
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IUserService, UserService>();
 
             return services;
         }

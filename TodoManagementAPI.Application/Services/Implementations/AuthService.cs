@@ -83,7 +83,8 @@ namespace TodoManagementAPI.Application.Services.Implementations
                 {
             new Claim(JwtRegisteredClaimNames.Sub, user.UserId.ToString()),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            new Claim(JwtRegisteredClaimNames.Email, user.Email!)
+            new Claim(JwtRegisteredClaimNames.Email, user.Email!),
+            new Claim(JwtRegisteredClaimNames.Name, user.FullName!)
         }),
                 Expires = DateTime.UtcNow.AddMinutes(_jwtSettings.ExpiryMinutes),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

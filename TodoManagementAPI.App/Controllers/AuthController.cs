@@ -5,7 +5,7 @@ using TodoManagementAPI.Domain.DTOs.User;
 
 namespace TodoManagementAPI.App.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/auth")]
     [ApiController]
     public class AuthController : ControllerBase
     {
