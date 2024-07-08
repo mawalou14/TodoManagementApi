@@ -67,7 +67,7 @@ namespace TodoManagementAPI.Application.Services.Implementations
             var user = await userRepository.GetUserByIdAsync(userId);
             if (user == null)
             {
-                throw new Exception("The user is not found.");
+                throw new Exception("The user provided is not found.");
             }
 
             var todos = await _todoRepository.GetTodosByUserIdAsync(userId);
