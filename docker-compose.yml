@@ -15,13 +15,13 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - todoManagement_data:/var/lib/postgresql/data
-  TodoManagement.api:
-    image: ${DOCKER_REGISTRY-}employeemanagementsystemapi
+      - TodoManagementDB_data:/var/lib/postgresql/data
+  todomanagementapi.app:
+    image: ${DOCKER_REGISTRY-}todomanagementapiapp
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: TodoManagementAPI.App/Dockerfile
 
 volumes:
-  todoManagement_data:
+  TodoManagementDB_data:
     external: false

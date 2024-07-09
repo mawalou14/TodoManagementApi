@@ -4,7 +4,7 @@
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
     <DockerPublishLocally>False</DockerPublishLocally>
-    <ProjectGuid>a6e7be3f-f3b0-44ab-b5c7-0999daae6249</ProjectGuid>
+    <ProjectGuid>e095c474-cb98-476b-9d84-6cfaf292048a</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/swagger</DockerServiceUrl>
     <DockerServiceName>todomanagementapi.app</DockerServiceName>
