@@ -1,4 +1,6 @@
 # Todo Management API
+[[_TOC_]]
+
 
 The Todo Management API is a .NET Core web application designed for managing user todos and providing authentication services. It includes orchestration support using Docker Compose.
 
@@ -27,6 +29,11 @@ The Todo Management API is a .NET Core web application designed for managing use
   - Docker Compose for managing multi-container Docker applications.
   - Includes Dockerfile for building the API container.
   - PostgreSQL database container integration.
+
+- **Validation:**
+  - Input validation using FluentValidation.
+  - Ensures data integrity and proper error handling.
+  - Validations for user registration, login, profile updates, and todos.
 
 ## Technologies Used
 
@@ -69,3 +76,20 @@ To run the application locally using Docker Compose:
   - `PATCH /profile/{userId}`: Update user profile.
   - `PATCH /profile/{userId}/password`: Change user password.
   - `DELETE /profile/{userId}`: Delete user account.
+
+## Input Validations
+
+- **User Registration and Login:**
+  - Email must be in a valid email format.
+  - Password must meet minimum length and complexity requirements.
+  - Confirm Password must match the Password.
+
+- **Profile Updates:**
+  - Full Name cannot be empty.
+  - Password change requires current password verification and new password confirmation.
+
+- **Todo Management:**
+  - Description must be provided.
+  - Priority must be one of the predefined values (high, medium, low).
+  - Status must be valid.
+  - Targeted Time must be a future date.
