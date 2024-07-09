@@ -1,5 +1,4 @@
 # Todo Management API
-[[_TOC_]]
 
 
 The Todo Management API is a .NET Core web application designed for managing user todos and providing authentication services. It includes orchestration support using Docker Compose.
