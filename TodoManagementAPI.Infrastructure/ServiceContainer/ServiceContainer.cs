@@ -63,6 +63,18 @@ namespace TodoManagementAPI.Infrastructure.ServiceContainer
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ITodoService, TodoService>();
 
+            //Add cors
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAngulaClient",
+                    builder => builder
+                    //.WithOrigins("https://localhost:7180"")
+                    .WithOrigins("http://localhost:4200")
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
+
             return services;
         }
 
