@@ -75,15 +75,8 @@ namespace TodoManagementAPI.App.Controllers
         [HttpGet("user/{userId}")]
         public async Task<IActionResult> GetUserTodos(Guid userId)
         {
-            try
-            {
                 var todos = await _todoService.GetUserTodosAsync(userId);
                 return Ok(todos);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
-            }
         }
 
         [HttpPatch("update-status")]

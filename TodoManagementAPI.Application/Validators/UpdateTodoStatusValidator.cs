@@ -8,7 +8,7 @@ namespace TodoManagementAPI.Application.Validators
         public UpdateTodoStatusValidator()
         {
             RuleFor(x => x.TodoId).NotEmpty();
-            RuleFor(x => x.Status).InclusiveBetween(1, 2).WithMessage("Status must be either 1 or 2.");
+            RuleFor(x => x.Status).InclusiveBetween(1, 3).WithMessage("Status must be either 1, 2 or 3.");
         }
     }
 }

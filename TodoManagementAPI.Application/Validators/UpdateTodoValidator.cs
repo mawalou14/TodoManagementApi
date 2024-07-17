@@ -22,7 +22,7 @@ namespace TodoManagementAPI.Application.Validators
             .InclusiveBetween(1, 3).WithMessage("Priority must be either 1 (Low), 2 (Medium), or 3 (High).");
 
             RuleFor(x => x.Status)
-           .InclusiveBetween(1, 2).WithMessage("Status must be either 1 or 2.");
+           .InclusiveBetween(1, 3).WithMessage("Status must be either 1, 2 or 3.");
         }
 
         private bool BeAValidDate(DateTime date)
