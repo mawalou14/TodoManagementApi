@@ -15,22 +15,25 @@ namespace TodoManagementAPI.Infrastructure.RepositoryImplementation
             this._context = context;
         }
 
-        public async Task AddAsync(Todo todo)
+        public async Task<Todo> AddAsync(Todo todo)
         {
             await _context.Todos.AddAsync(todo);
             await _context.SaveChangesAsync();
+            return todo;
         }
 
-        public async Task UpdateAsync(Todo todo)
+        public async Task<Todo> UpdateAsync(Todo todo)
         {
             _context.Todos.Update(todo);
             await _context.SaveChangesAsync();
+            return todo;
         }
 
-        public async Task DeleteAsync(Todo todo)
+        public async Task<Todo> DeleteAsync(Todo todo)
         {
             _context.Todos.Remove(todo);
             await _context.SaveChangesAsync();
+            return todo;
         }
 
         public async Task<Todo> GetByIdAsync(Guid todoId)

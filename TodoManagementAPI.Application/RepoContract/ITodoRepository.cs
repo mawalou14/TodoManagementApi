@@ -4,9 +4,9 @@ namespace TodoManagementAPI.Application.RepoContract
 {
     public interface ITodoRepository
     {
-        Task AddAsync(Todo todo);
-        Task UpdateAsync(Todo todo);
-        Task DeleteAsync(Todo todo);
+        Task<Todo> AddAsync(Todo todo);
+        Task<Todo> UpdateAsync(Todo todo);
+        Task<Todo> DeleteAsync(Todo todo);
         Task<Todo> GetByIdAsync(Guid todoId);
         Task<List<Todo>> GetTodosByUserIdAsync(Guid userId);
     }

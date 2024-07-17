@@ -19,57 +19,50 @@ namespace TodoManagementAPI.App.Controllers
         [HttpPost("create")]
         public async Task<IActionResult> CreateTodo([FromBody] CreateTodoDto createTodoDto)
         {
-            try
+                var createdResult = await _todoService.CreateTodoAsync(createTodoDto);
+            if(createdResult.Flag)
             {
-                await _todoService.CreateTodoAsync(createTodoDto);
-                return Ok("Todo created successfully.");
-            }
-            catch (Exception ex)
+                return Ok(createdResult.Message);
+            } else
             {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
+                return BadRequest(createdResult.Message);
             }
+                
         }
 
         [HttpPut("update")]
         public async Task<IActionResult> UpdateTodo([FromBody] UpdateTodoDto updateTodoDto)
         {
-            try
+              var updatedResult = await _todoService.UpdateTodoAsync(updateTodoDto);
+            if (updatedResult.Flag)
             {
-                await _todoService.UpdateTodoAsync(updateTodoDto);
-                return Ok("Todo updated successfully.");
+                return Ok(updatedResult.Message);
             }
-            catch (Exception ex)
+            else
             {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
+                return BadRequest(updatedResult.Message);
             }
         }
 
         [HttpDelete("delete/{todoId}")]
         public async Task<IActionResult> DeleteTodo(Guid todoId)
         {
-            try
+               var deletedResult = await _todoService.DeleteTodoAsync(todoId);
+            if (deletedResult.Flag)
             {
-                await _todoService.DeleteTodoAsync(todoId);
-                return Ok("Todo deleted successfully.");
+                return Ok(deletedResult.Message);
             }
-            catch (Exception ex)
+            else
             {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
+                return BadRequest(deletedResult.Message);
             }
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetTodoById(Guid id)
         {
-            try
-            {
                 var todo = await _todoService.GetTodoByIdAsync(id);
                 return Ok(todo);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
-            }
         }
 
         [HttpGet("user/{userId}")]
@@ -82,28 +75,28 @@ namespace TodoManagementAPI.App.Controllers
         [HttpPatch("update-status")]
         public async Task<IActionResult> UpdateTodoStatus([FromBody] UpdateTodoStatusDto updateTodoStatusDto)
         {
-            try
+                var updatedTodoResult = await _todoService.UpdateTodoStatusAsync(updateTodoStatusDto);
+            if (updatedTodoResult.Flag)
             {
-                await _todoService.UpdateTodoStatusAsync(updateTodoStatusDto);
-                return Ok("Todo status updated successfully.");
+                return Ok(updatedTodoResult.Message);
             }
-            catch (Exception ex)
+            else
             {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
+                return BadRequest(updatedTodoResult.Message);
             }
         }
 
         [HttpPatch("update-priority")]
         public async Task<IActionResult> UpdateTodoPriority([FromBody] UpdateTodoPriorityDto updateTodoPriorityDto)
         {
-            try
+                var updatedTodoResult = await _todoService.UpdateTodoPriorityAsync(updateTodoPriorityDto);
+            if (updatedTodoResult.Flag)
             {
-                await _todoService.UpdateTodoPriorityAsync(updateTodoPriorityDto);
-                return Ok("Todo priority updated successfully.");
+                return Ok(updatedTodoResult.Message);
             }
-            catch (Exception ex)
+            else
             {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
+                return BadRequest(updatedTodoResult.Message);
             }
         }
     }

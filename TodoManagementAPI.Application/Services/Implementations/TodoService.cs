@@ -19,36 +19,49 @@ namespace TodoManagementAPI.Application.Services.Implementations
             this.userRepository = userRepository;
         }
 
-        public async Task CreateTodoAsync(CreateTodoDto createTodoDto)
+        public async Task<GeneralResponse> CreateTodoAsync(CreateTodoDto createTodoDto)
         {
+            if (createTodoDto == null) return new GeneralResponse(false, "Please Provide a valid Todo");
+            var user = await userRepository.GetUserByIdAsync(createTodoDto.UserId);
+            if (user == null)
+            {
+                return new GeneralResponse(false, "Invalid User");
+            }
             var todo = _mapper.Map<Todo>(createTodoDto);
-            await _todoRepository.AddAsync(todo);
+            var createdTodo = await _todoRepository.AddAsync(todo);
+            if (createdTodo == null) return new GeneralResponse(false, "Error While Creating The Todo");
+            return new GeneralResponse(true, "Todo Created SuccessFully");
         }
 
-        public async Task UpdateTodoAsync(UpdateTodoDto updateTodoDto)
+        public async Task<GeneralResponse> UpdateTodoAsync(UpdateTodoDto updateTodoDto)
         {
+            if (updateTodoDto == null) return new GeneralResponse(false, "Please Provide a valid Todo");
             var existingTodo = await _todoRepository.GetByIdAsync(updateTodoDto.TodoId);
 
             if (existingTodo == null)
             {
-                throw new Exception("Todo not found.");
+                return new GeneralResponse(false, "Todo Provided is not found");
             }
 
             _mapper.Map(updateTodoDto, existingTodo);
 
-            await _todoRepository.UpdateAsync(existingTodo);
+            var updatedTodo = await _todoRepository.UpdateAsync(existingTodo);
+            if (updatedTodo == null) return new GeneralResponse(false, "Error While Updating The Todo");
+            return new GeneralResponse(true, "Todo Updated SuccessFully");
         }
 
-        public async Task DeleteTodoAsync(Guid todoId)
+        public async Task<GeneralResponse> DeleteTodoAsync(Guid todoId)
         {
             var existingTodo = await _todoRepository.GetByIdAsync(todoId);
 
             if (existingTodo == null)
             {
-                throw new Exception("Todo not found.");
+                return new GeneralResponse(false, "Todo Provided is not found");
             }
 
-            await _todoRepository.DeleteAsync(existingTodo);
+            var deletedTodo = await _todoRepository.DeleteAsync(existingTodo);
+            if (deletedTodo == null) return new GeneralResponse(false, "Error While Deleting The Todo");
+            return new GeneralResponse(true, "Todo Deleted SuccessFully");
         }
 
         public async Task<TodoDto> GetTodoByIdAsync(Guid todoId)
@@ -57,7 +70,7 @@ namespace TodoManagementAPI.Application.Services.Implementations
 
             if (todo == null)
             {
-                throw new Exception("Todo not found.");
+                return null;
             }
 
             return _mapper.Map<TodoDto>(todo);
@@ -67,33 +80,37 @@ namespace TodoManagementAPI.Application.Services.Implementations
             var user = await userRepository.GetUserByIdAsync(userId);
             if (user == null)
             {
-                throw new Exception("The user provided is not found.");
+                return null;
             }
 
             var todos = await _todoRepository.GetTodosByUserIdAsync(userId);
             return _mapper.Map<List<GetTodoDto>>(todos);
         }
 
-        public async Task UpdateTodoStatusAsync(UpdateTodoStatusDto updateTodoStatusDto)
+        public async Task<GeneralResponse> UpdateTodoStatusAsync(UpdateTodoStatusDto updateTodoStatusDto)
         {
             var todo = await _todoRepository.GetByIdAsync(updateTodoStatusDto.TodoId);
             if (todo == null)
             {
-                throw new Exception("Todo not found");
+                return new GeneralResponse(false, "Todo Provided is not found");
             }
             todo.Status = updateTodoStatusDto.Status;
-            await _todoRepository.UpdateAsync(todo);
+            var updatedTodo = await _todoRepository.UpdateAsync(todo);
+            if (updatedTodo == null) return new GeneralResponse(false, "Error While Updating the status of this Todo");
+            return new GeneralResponse(true, "Todo Status Updated SuccessFully");
         }
 
-        public async Task UpdateTodoPriorityAsync(UpdateTodoPriorityDto updateTodoPriorityDto)
+        public async Task<GeneralResponse> UpdateTodoPriorityAsync(UpdateTodoPriorityDto updateTodoPriorityDto)
         {
             var todo = await _todoRepository.GetByIdAsync(updateTodoPriorityDto.TodoId);
             if (todo == null)
             {
-                throw new Exception("Todo not found");
+                return new GeneralResponse(false, "Todo Provided is not found");
             }
             todo.Priority = updateTodoPriorityDto.Priority;
-            await _todoRepository.UpdateAsync(todo);
+            var updatedTodo = await _todoRepository.UpdateAsync(todo);
+            if (updatedTodo == null) return new GeneralResponse(false, "Error While Updating the priority of this Todo");
+            return new GeneralResponse(true, "Todo Priority Updated SuccessFully");
         }
     }
 }
