@@ -1,7 +1,15 @@
 # Todo Management API
 
-
 The Todo Management API is a .NET Core web application designed for managing user todos and providing authentication services. It includes orchestration support using Docker Compose.
+
+## Table of Contents
+
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Getting Started](#getting-started)
+- [API Endpoints](#api-endpoints)
+- [Input Validations](#input-validations)
+- [Web App Repository](#web-app-repository)
 
 ## Features
 
@@ -92,3 +100,9 @@ To run the application locally using Docker Compose:
   - Priority must be one of the predefined values (high, medium, low).
   - Status must be valid.
   - Targeted Time must be a future date.
+
+## Web App Repository
+
+- Here we have the Web Application Repository for this project: [Angular Todo Management Repository](https://github.com/mawalou14/TodoManagementApp.git).
+
+- Note that the API is made with Angular version 16.
