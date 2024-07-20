@@ -68,8 +68,7 @@ namespace TodoManagementAPI.Infrastructure.ServiceContainer
             {
                 options.AddPolicy("AllowAngulaClient",
                     builder => builder
-                    //.WithOrigins("https://localhost:7180"")
-                    .WithOrigins("http://localhost:4200")
+                    .WithOrigins("http://localhost:1414")
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials());
